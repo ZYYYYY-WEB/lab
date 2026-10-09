@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>学习实验室：状态重构 · 循证型大学生学习状态模拟教育工具</title>
+<meta name="description" content="《学习实验室：状态重构》——基于扎根理论质性研究的循证型大学生学习状态模拟教育工具，用模拟体验传递学习规律，用循证策略支持真实调整。" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">
+      <span class="mark">实</span>
+      <span>学习实验室<span class="sub">· 状态重构</span></span>
+    </a>
+    <span class="spacer"></span>
+    <nav class="header-nav">
+      <button class="btn btn-ghost btn-sm" id="navHome" type="button">首页</button>
+      <button class="btn btn-ghost btn-sm" id="navAtlas" type="button">结局图鉴</button>
+      <a class="btn btn-ghost btn-sm" href="teacher.html">教师端</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ==================== 模块 1：首页入口 ==================== -->
+  <section id="view-home" class="view">
+    <div class="container">
+      <div class="hero">
+        <h1>学习实验室：状态重构</h1>
+        <h2>循证型大学生学习状态模拟教育工具</h2>
+
+        <div class="notice">
+          <div><b>📌 机制说明：</b>本游戏全部基于本科大创项目《大学生低学习投入的形成机制研究——基于扎根理论的质性考察》开发。</div>
+          <div class="meta">包含 40+ 类真实学生典型事件、7 种典型发展路径，数值规律经一手访谈数据校准。</div>
+        </div>
+
+        <p class="lead">
+          你是一名大一学生。你将管理一整学期的学习、生活与社交资源，
+          应对课程、考试、同伴与老师的各种事件，
+          亲身体验学习投入从「正常」→「下滑」→「调整」的完整过程。
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="btnStart" type="button">开始新学期 🚀</button>
+          <button class="btn" id="btnAtlas" type="button">结局图鉴 📖</button>
+        </div>
+
+        <details class="fold">
+          <summary>📖 玩法说明</summary>
+          <div class="fold-body">
+            <ol>
+              <li><b>管理精力</b>：每周初恢复少量精力，学习类行动消耗精力，精力不足时高强度行动不可选。</li>
+              <li><b>权衡取舍</b>：没有完美答案——提升一个维度往往以牺牲另一个为代价；连续放松虽然省力，却会让投入悄悄滑落。</li>
+              <li><b>应对事件</b>：课程卡顿、作业积压、求助犹豫……你的选择会留下标记，影响后续事件的走向。</li>
+              <li><b>研究式复盘</b>：第 14 周结束后，系统按最终状态与整学期轨迹判定结局，给出对应研究结论与可操作的现实建议。</li>
+              <li><b>三维投入模型</b>：
+                <ul>
+                  <li>行为投入：出勤、作业、学习时长等可见的行动付出</li>
+                  <li>认知投入：理解、思考、策略运用等脑力参与深度</li>
+                  <li>情感投入：兴趣、价值感、归属感等内心状态</li>
+                </ul>
+                三者互相牵动，单一维度持续下滑会引发连锁反应。
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <p style="margin-top:26px;font-size:12.5px;color:var(--muted)">
+          <a href="teacher.html" id="teacherEntry">教师端入口 →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 模块 2：游戏主界面 ==================== -->
+  <section id="view-game" class="view" hidden>
+    <div class="container">
+      <div class="section-title">学 期 进 度</div>
+      <div class="card">
+        <div class="weekbar">
+          <div class="cells" id="weekCells"></div>
+          <div class="label" id="weekLabel">第 1 周 / 共 14 周</div>
+        </div>
+        <div style="text-align:right;font-size:12.5px;color:var(--muted)">学期进度：<b id="weekNum">1/14</b></div>
+      </div>
+
+      <div class="section-title">状 态 数 值</div>
+      <div class="card">
+        <div class="stat-grid" id="statGrid">
+          <div class="stat behavior" id="statBehavior">
+            <div class="top"><span class="name">行为投入</span><span class="val">70</span></div>
+            <div class="bar"><i style="width:70%"></i></div>
+          </div>
+          <div class="stat cognition" id="statCognition">
+            <div class="top"><span class="name">认知投入</span><span class="val">70</span></div>
+            <div class="bar"><i style="width:70%"></i></div>
+          </div>
+          <div class="stat emotion" id="statEmotion">
+            <div class="top"><span class="name">情感投入</span><span class="val">70</span></div>
+            <div class="bar"><i style="width:70%"></i></div>
+          </div>
+        </div>
+        <div class="energy" id="statEnergy">
+          <div class="top"><span class="name">精力值</span><span class="val">50</span></div>
+          <div class="bar"><i style="width:50%"></i></div>
+        </div>
+      </div>
+
+      <div class="section-title">本 周 行 动</div>
+      <div class="card">
+        <h3 style="font-size:17px;margin-bottom:16px">本周你要重点做什么？</h3>
+        <div class="action-groups" id="actionGroups"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 模块 3：结局复盘页 ==================== -->
+  <section id="view-ending" class="view" hidden>
+    <div class="container">
+      <div class="section-title">学 期 状 态 总 评</div>
+      <div class="path-banner">
+        <div class="k">你的学期状态</div>
+        <div class="p" id="endPathName">—</div>
+        <div class="score">综合投入指数：<b id="endScore">—</b> 分</div>
+        <div style="margin-top:8px"><span class="chip chip-accent" id="endPercent">—</span></div>
+      </div>
+
+      <div class="section-title">个 人 投 入 轨 迹</div>
+      <div class="chart-wrap">
+        <div class="chart-legend">
+          <span><i style="background:var(--behavior)"></i>行为投入</span>
+          <span><i style="background:var(--cognition)"></i>认知投入</span>
+          <span><i style="background:var(--emotion)"></i>情感投入</span>
+        </div>
+        <div id="chartHost"></div>
+        <div class="chart-note">轨迹基于你游戏中的选择生成，对应真实学生的典型发展路径</div>
+      </div>
+
+      <div class="section-title">研 究 式 复 盘</div>
+      <div class="review-3" id="review3"></div>
+
+      <div class="ending-actions">
+        <button class="btn btn-primary" id="btnRestart" type="button">重新开始</button>
+        <button class="btn" id="btnAiEnding" type="button">进入 AI 督导</button>
+        <button class="btn" id="btnShare" type="button">分享状态</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>学习实验室：状态重构 · 循证型大学生学习状态模拟教育工具</div>
+    <div class="links">研究依据：本科大创项目《大学生低学习投入的形成机制研究——基于扎根理论的质性考察》 · <a href="teacher.html">教师端演示</a></div>
+    <div style="margin-top:6px">AI 督导仅基于研究中的学习支持策略回复，不提供心理诊断或医疗建议，仅供参考。</div>
+  </div>
+</footer>
+
+<!-- 通用弹层 -->
+<div class="overlay" id="overlay">
+  <div class="dialog" id="dialog"></div>
+</div>
+
+<!-- 轻提示 -->
+<div class="toast" id="toast"></div>
+
+<!-- 模块 4：AI 轻督导 -->
+<button class="fab" id="fab" type="button" hidden>💬&nbsp;学习督导</button>
+<aside class="chat" id="chat" aria-label="学习督导对话">
+  <header>
+    <span style="width:32px;height:32px;border-radius:9px;background:var(--accent-soft);display:grid;place-items:center">💬</span>
+    <span>
+      <div class="t">学习督导</div>
+      <div class="s">基于学习投入研究的循证策略</div>
+    </span>
+    <button class="x" id="chatClose" type="button" aria-label="关闭">×</button>
+  </header>
+  <div class="log" id="chatLog"></div>
+  <div class="quick" id="chatQuick"></div>
+  <form class="input" id="chatForm">
+    <input id="chatInput" type="text" placeholder="描述一下你遇到的学习问题…" autocomplete="off" />
+    <button type="submit" aria-label="发送">↑</button>
+  </form>
+  <div class="foot">建议均来自学习投入研究的循证策略，仅供参考</div>
+</aside>
+
+<script src="assets/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>班级学情后台（演示版） · 学习实验室：状态重构</title>
+<meta name="description" content="《学习实验室：状态重构》教师端演示版：班级学情概览、学生列表与循证支持策略库（模拟示例数据）。" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="teacher.html">
+      <span class="mark">师</span>
+      <span>班级学情后台<span class="sub">· 演示版</span></span>
+    </a>
+    <span class="spacer"></span>
+    <nav class="header-nav">
+      <a class="btn btn-ghost btn-sm" href="index.html">← 返回学生端</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:26px">
+    <h1 style="font-size:24px">班级学情后台 <span style="font-size:14px;color:var(--muted);font-weight:500">| 2024 秋季学期示例数据</span></h1>
+    <p style="color:var(--muted);font-size:13.5px;margin-top:-4px">
+      数据说明：基于研究样本特征模拟生成，仅作功能演示，不含任何真实学生信息。
+    </p>
+
+    <div class="tabs" style="margin-top:20px">
+      <button class="tab active" data-tab="overview" type="button">班级学情概览</button>
+      <button class="tab" data-tab="students" type="button">学生列表</button>
+      <button class="tab" data-tab="strategy" type="button">支持策略库</button>
+    </div>
+
+    <!-- ============ 页面 1：班级学情概览 ============ -->
+    <section class="tab-panel active" id="panel-overview">
+      <div class="kpi-grid" id="kpiGrid"></div>
+
+      <div class="panel-grid">
+        <div class="card">
+          <h3 style="font-size:16px">三维投入分布</h3>
+          <div id="barHost"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:16px">首要问题类型分布</h3>
+          <div id="pieHost"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3 style="font-size:16px">近 8 周投入趋势</h3>
+        <div class="chart-legend">
+          <span><i style="background:var(--behavior)"></i>行为投入</span>
+          <span><i style="background:var(--cognition)"></i>认知投入</span>
+          <span><i style="background:var(--emotion)"></i>情感投入</span>
+        </div>
+        <div id="lineHost"></div>
+        <div class="chart-note">班级均值，每周更新一次</div>
+      </div>
+    </section>
+
+    <!-- ============ 页面 2：学生列表 ============ -->
+    <section class="tab-panel" id="panel-students">
+      <div class="filters" id="filters"></div>
+      <div class="card" style="padding:8px 6px">
+        <table class="list">
+          <thead>
+            <tr>
+              <th>学生编号</th><th>当前状态</th><th>三维得分</th>
+              <th>主要问题</th><th>变化趋势</th>
+            </tr>
+          </thead>
+          <tbody id="studentRows"></tbody>
+        </table>
+      </div>
+      <div class="sdetail" id="studentDetail" style="margin-top:16px">
+        <p style="color:var(--muted);font-size:13.5px;margin:0">点击上方任意一位学生，查看其个人投入轨迹与路径分型。</p>
+      </div>
+    </section>
+
+    <!-- ============ 页面 3：支持策略库 ============ -->
+    <section class="tab-panel" id="panel-strategy">
+      <p style="color:var(--ink-2);font-size:13.5px">
+        按问题分类整理，每条策略均标注适用场景、实施主体与注意事项，供教师与辅导员参考。
+      </p>
+      <div class="strategy-grid" id="strategyGrid"></div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>学习实验室：状态重构 · 教师端演示版</div>
+    <div class="links">研究依据：本科大创项目《大学生低学习投入的形成机制研究——基于扎根理论的质性考察》 · <a href="index.html">学生端</a></div>
+    <div style="margin-top:6px">本页全部数据为模拟示例，仅用于展示 B 端应用价值，不含真实后台与真实学生信息。</div>
+  </div>
+</footer>
+
+<script src="assets/teacher.js"></script>
+</body>
+</html>
